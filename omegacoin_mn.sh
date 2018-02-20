@@ -114,7 +114,7 @@ sudo ufw allow 7778/tcp
 sudo ufw allow 7777/tcp
 sudo ufw logging on 
 sudo ufw status
-sudo ufw enable -y
+sudo ufw enable
 echo "basic security completed..."
 
 echo "restarting wallet with new configs, 30 seconds..."
