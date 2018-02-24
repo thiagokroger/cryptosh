@@ -60,7 +60,7 @@ echo "Loading wallet, 30 seconds wait..."
 northernd --daemon
 sleep 30
 
-cat <<EOF > ~/.northerncore/northern.conf
+cat <<EOF > ~/.northern/northern.conf
 rpcuser=northern
 EOF
 
@@ -77,7 +77,7 @@ northern-cli stop
 
 echo "creating final config..."
 
-cat <<EOF > ~/.northerncore/northern.conf
+cat <<EOF > ~/.northern/northern.conf
 
 rpcuser=northern
 rpcpassword=$PASSWORD
