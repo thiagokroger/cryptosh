@@ -48,8 +48,7 @@ sudo apt-get install libdb5.3-dev libdb5.3++-dev -y
 
 echo "Packages complete..."
 
-wget https://github.com/Northerncryptodev/Northern/releases/download/v2.0.1/northern-2.0.1.x86_64-linux-gnu-daemon-nogui$
-
+wget https://github.com/Northerncryptodev/Northern/releases/download/v2.0.1/northern-2.0.1.x86_64-linux-gnu-daemon-nogui.tar.gz
 
 tar -zxvf northern-2.0.1.x86_64-linux-gnu-daemon-nogui.tar.gz
 sudo cp northern-2.0.1/northernd /usr/local/bin/
