@@ -67,6 +67,8 @@ EOF
 echo "RELOADING WALLET..."
 northernd --daemon
 sleep 10
+northernd --daemon
+sleep 10
 
 echo "making genkey..."
 GENKEY=$(northern-cli masternode genkey)
@@ -102,17 +104,6 @@ sudo apt-get update -y
 #fail2ban:
 sudo systemctl enable fail2ban
 sudo systemctl start fail2ban
-
-#add a firewall
-sudo ufw default allow outgoing
-sudo ufw default deny incoming
-sudo ufw allow ssh/tcp
-sudo ufw limit ssh/tcp
-sudo ufw allow 60151/tcp
-sudo ufw logging on
-sudo ufw status
-sudo ufw enable
-echo "basic security completed..."
 
 echo "restarting wallet with new configs, 30 seconds..."
 northernd --daemon
