@@ -48,7 +48,7 @@ sudo apt-get install libdb5.3-dev libdb5.3++-dev -y
 
 echo "Packages complete..."
 
-wget https://github.com/Northerncryptodev/Northern/releases/download/v2.0.1/northern-2.0.1.x86_64-linux-gnu-daemon-nogui.tar.gz
+wget https://github.com/Northerncryptodev/Northern/releases/download/v2.0.1/northern-2.0.1.x86_64-linux-gnu-daemon-nogui$
 
 
 
@@ -62,11 +62,10 @@ sleep 30
 
 cat <<EOF > ~/.northern/northern.conf
 rpcuser=northern
+rpcpassword=3a76std7sa6da8sfd8
 EOF
 
 echo "RELOADING WALLET..."
-northernd --daemon
-sleep 10
 northernd --daemon
 sleep 10
 
