@@ -6,7 +6,12 @@ sudo apt-get update
 sudo apt-get -y install python-virtualenv
 sudo apt-get -y install virtualenv
 cd /root/.zexcoincore
-git clone https://github.com/thiagokroger/zex-sentinel.git && cd sentinel
+
+wget https://github.com/thiagokroger/cryptosh/raw/master/sentinel/zexcoin/sentinel.tar.gz
+
+tar -zxvf sentinel.tar.gz && cd sentinel
+
+
 virtualenv ./venv
 ./venv/bin/pip install -r requirements.txt
 
