@@ -21,7 +21,6 @@ echo "* * * * * cd /root/.zexcoincore && ./venv/bin/python bin/sentinel.py >/dev
 #install new cron file
 crontab zex
 rm zex
-./venv/bin/py.test ./test
 
 SENTINEL_DEBUG=1 ./venv/bin/python bin/sentinel.py
 
