@@ -121,8 +121,6 @@ sudo ufw enable
 echo "basic security completed..."
 
 echo "restarting wallet with new configs, 30 seconds..."
-zexcoin-cli stop
-sleep 10
 zexcoind --daemon
 sleep 60
 
