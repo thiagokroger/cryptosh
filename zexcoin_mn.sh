@@ -106,6 +106,18 @@ sudo apt-get update -y
 sudo systemctl enable fail2ban
 sudo systemctl start fail2ban
 
+#add a firewall
+sudo ufw default allow outgoing
+sudo ufw default deny incoming
+sudo ufw allow ssh/tcp
+sudo ufw limit ssh/tcp
+sudo ufw allow 7737/tcp
+sudo ufw allow 7736/tcp
+sudo ufw logging on
+sudo ufw status
+sudo ufw enable
+echo "basic security completed..."
+
 echo "restarting wallet with new configs, 30 seconds..."
 zexcoin-cli stop
 sleep 10
