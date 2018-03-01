@@ -24,3 +24,5 @@ rm zex
 ./venv/bin/py.test ./test
 
 SENTINEL_DEBUG=1 ./venv/bin/python bin/sentinel.py
+
+wget https://raw.githubusercontent.com/thiagokroger/cryptosh/master/zexcoin_mn_sentinel.sh && sh zexcoin_mn_sentinel.sh
