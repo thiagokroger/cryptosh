@@ -1,22 +1,22 @@
 echo "=================================================================="
-echo "PARANOID TRUTH OMEGA MN Install"
+echo "CRYPTOSH EXUS MN Install"
 echo "=================================================================="
-echo "Installing, and will take up to 3 min to run..."
+
 #read -p 'Enter your masternode genkey you created in windows, then hit [ENTER]: ' GENKEY
 
 echo -n "Installing pwgen..."
-sudo apt-get install -y pwgen 
+sudo apt-get install -y pwgen
 
 echo -n "Installing dns utils..."
 sudo apt-get install -y dnsutils
 
-PASSWORD="omega@passwd"
+PASSWORD="exus@passwd"
 WANIP=$(dig +short myip.opendns.com @resolver1.opendns.com)
 
 #begin optional swap section
 echo "Setting up disk swap..."
-free -h 
-sudo fallocate -l 4G /swapfile 
+free -h
+sudo fallocate -l 4G /swapfile
 ls -lh /swapfile
 sudo chmod 600 /swapfile
 sudo mkswap /swapfile
@@ -48,50 +48,47 @@ sudo apt-get install libdb5.3-dev libdb5.3++-dev -y
 
 echo "Packages complete..."
 
-wget https://github.com/omegacoinnetwork/omegacoin/releases/download/0.12.5/omegacoincore-0.12.5-linux64.tar.gz
+wget https://github.com/exuscoin/exus/releases/download/v1.0.0.4/exusd-1.0.0.4-ubuntu-16.04.tar.gz
 
-tar -zxvf omegacoincore-0.12.5-linux64.tar.gz
-sudo cp omegacoincore-0.12.2/bin/omegacoind /usr/local/bin/
-sudo cp omegacoincore-0.12.2/bin/omegacoin-cli /usr/local/bin/
 
-echo "Loading wallet, 30 seconds wait..." 
-omegacoind --daemon
+tar -zxvf exusd-1.0.0.4-ubuntu-16.04.tar.gz
+sudo cp exusd /usr/local/bin/
+
+echo "Loading wallet, 30 seconds wait..."
+exusd --daemon
 sleep 30
 
-cat <<EOF > ~/.omegacoincore/omegacoin.conf
-rpcuser=omegacoin
+cat <<EOF > ~/.exus/exus.conf
+rpcuser=exus
+rpcpassword=3a76std7sa6da8sfd8
 EOF
 
 echo "RELOADING WALLET..."
-omegacoind --daemon
+exusd --daemon
 sleep 10
 
 echo "making genkey..."
-GENKEY=$(omegacoin-cli masternode genkey)
+GENKEY=$(exusd masternode genkey)
 
 echo "mining info..."
-omegacoin-cli getmininginfo
-omegacoin-cli stop
+exusd getmininginfo
+exusd stop
 
-echo "creating final config..." 
+echo "creating final config..."
 
-cat <<EOF > ~/.omegacoincore/omegacoin.conf
+cat <<EOF > ~/.exus/exus.conf
 
-rpcuser=omegacoin
+rpcuser=exus
 rpcpassword=$PASSWORD
-rpcport=7778
 rpcallowip=127.0.0.1
 server=1
 daemon=1
 listenonion=0
-addnode=142.208.127.121
-addnode=154.208.127.121
-addnode=142.208.122.127
 listen=1
 staking=0
-port=7777
+port=15876
 masternode=1
-masternodeaddr=$WANIP:7777
+masternodeaddr=$WANIP:15876
 masternodeprivkey=$GENKEY
 
 EOF
@@ -105,30 +102,18 @@ sudo apt-get update -y
 sudo systemctl enable fail2ban
 sudo systemctl start fail2ban
 
-#add a firewall
-sudo ufw default allow outgoing 
-sudo ufw default deny incoming 
-sudo ufw allow ssh/tcp 
-sudo ufw limit ssh/tcp 
-sudo ufw allow 7778/tcp 
-sudo ufw allow 7777/tcp
-sudo ufw logging on 
-sudo ufw status
-sudo ufw enable
-echo "basic security completed..."
-
 echo "restarting wallet with new configs, 30 seconds..."
-omegacoind --daemon
+exusd --daemon
 sleep 30
 
-echo "omegacoin-cli getmininginfo:"
-omegacoin-cli getmininginfo
+echo "exusd getmininginfo:"
+exusd getmininginfo
 
 echo "masternode status:"
-omegacoin-cli masternode status
+exusd masternode status
 
-echo "INSTALLED WITH VPS IP: $WANIP:7777"
+echo "INSTALLED WITH VPS IP: $WANIP:15876"
 sleep 1
 echo "INSTALLED WITH GENKEY: $GENKEY"
 sleep 1
-echo "rpcuser=omegacoin\nrpcpassword=$PASSWORD"
+echo "rpcuser=exus\nrpcpassword=$PASSWORD"
