@@ -91,7 +91,6 @@ staking=0
 rpcport=17866
 port=17817
 masternode=1
-masternodeaddr=$WANIP:17817
 masternodeprivkey=$GENKEY
 
 EOF
