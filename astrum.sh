@@ -75,7 +75,7 @@ astrumd stop
 
 echo "creating final config..."
 
-cat <<EOF > ~/.astrum/astrum.conf
+cat <<EOF > ~/.Astrum/Astrum.conf
 
 rpcuser=astrum
 rpcpassword=$PASSWORD
