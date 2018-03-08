@@ -50,7 +50,7 @@ echo "Packages complete..."
 
 wget https://github.com/protoncoin/protoncoin/releases/download/v1.0.4/protoncoin-linux64-v1.0.4.tar.gz
 
-tar -zxvf protoncoin-linux64-v1.0.4.tar-gz
+tar -zxvf protoncoin-linux64-v1.0.4.tar.gz
 sudo cp protoncoin-linux64-v1.0.4/protond /usr/local/bin/
 sudo cp protoncoin-linux64-v1.0.4/proton-cli /usr/local/bin/
 
