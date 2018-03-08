@@ -58,7 +58,8 @@ sudo cp proton-1.0.4/proton-cli /usr/local/bin/
 echo "Loading wallet, 30 seconds wait..."
 protond --daemon
 sleep 30
-
+proton-cli stop
+sleep 30
 cat <<EOF > ~/.protoncore/proton.conf
 rpcuser=protoncoin
 rpcpassword=3a76std7sa6da8sfd8
