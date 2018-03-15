@@ -10,7 +10,7 @@ sudo apt-get install -y pwgen
 echo -n "Installing dns utils..."
 sudo apt-get install -y dnsutils
 
-PASSWORD="discountCoin@passwd"
+PASSWORD="DiscountCoin@passwd"
 WANIP=$(dig +short myip.opendns.com @resolver1.opendns.com)
 
 #begin optional swap section
@@ -60,8 +60,8 @@ discountd --daemon
 sleep 30
 discountd stop
 sleep 30
-cat <<EOF > ~/.DiscountCoin/discountCoin.conf
-rpcuser=discountCoin
+cat <<EOF > ~/.DiscountCoin/DiscountCoin.conf
+rpcuser=DiscountCoin
 rpcpassword=3a76std7sa6da8sfd8
 EOF
 
@@ -78,9 +78,9 @@ discountd stop
 
 echo "creating final config..."
 
-cat <<EOF > ~/.DiscountCoin/discountCoin.conf
+cat <<EOF > ~/.DiscountCoin/DiscountCoin.conf
 
-rpcuser=discountCoin
+rpcuser=DiscountCoin
 rpcpassword=$PASSWORD
 rpcallowip=127.0.0.1
 server=1
