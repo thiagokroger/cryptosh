@@ -1,5 +1,5 @@
 echo "=================================================================="
-echo "CRYPTOSH Protoncoin MN Install"
+echo "CRYPTOSH Ultimacoin MN Install"
 echo "=================================================================="
 
 #read -p 'Enter your masternode genkey you created in windows, then hit [ENTER]: ' GENKEY
@@ -10,7 +10,7 @@ sudo apt-get install -y pwgen
 echo -n "Installing dns utils..."
 sudo apt-get install -y dnsutils
 
-PASSWORD="protoncoin@passwd"
+PASSWORD="ultimacoin@passwd"
 WANIP=$(dig +short myip.opendns.com @resolver1.opendns.com)
 
 #begin optional swap section
@@ -48,39 +48,39 @@ sudo apt-get install libdb5.3-dev libdb5.3++-dev -y
 
 echo "Packages complete..."
 
-wget https://github.com/protoncoin/protoncoin/releases/download/v1.0.4/protoncoin-linux64-v1.0.4.tar.gz
+wget http://github.com/ultimammp/ultima/releases/download/0.12.1.1/ultima_linux.tar.gz
 
-mkdir proton-1.0.4
-tar -zxvf protoncoin-linux64-v1.0.4.tar.gz -C proton-1.0.4
-sudo cp proton-1.0.4/protond /usr/local/bin/
-sudo cp proton-1.0.4/proton-cli /usr/local/bin/
+mkdir ultima-0.12.1.1
+tar -zxvf ultima_linux.tar.gz -C ultima-0.12.1.1
+sudo cp ultima-0.12.1.1/ultimad /usr/local/bin/
+sudo cp ultima-0.12.1.1/ultima-cli /usr/local/bin/
 
 echo "Loading wallet, 30 seconds wait..."
-protond --daemon
+ultimad --daemon
 sleep 30
-proton-cli stop
+ultima-cli stop
 sleep 30
-cat <<EOF > ~/.protoncore/proton.conf
-rpcuser=protoncoin
+cat <<EOF > ~/.ultimacore/ultima.conf
+rpcuser=ultimacoin
 rpcpassword=3a76std7sa6da8sfd8
 EOF
 
 echo "RELOADING WALLET..."
-protond --daemon
+ultimad --daemon
 sleep 10
 
 echo "making genkey..."
-GENKEY=$(proton-cli masternode genkey)
+GENKEY=$(ultima-cli masternode genkey)
 
 echo "mining info..."
-proton-cli getmininginfo
-proton-cli stop
+ultima-cli getmininginfo
+ultima-cli stop
 
 echo "creating final config..."
 
-cat <<EOF > ~/.protoncore/proton.conf
+cat <<EOF > ~/.ultimacore/ultima.conf
 
-rpcuser=protoncoin
+rpcuser=ultimacoin
 rpcpassword=$PASSWORD
 rpcallowip=127.0.0.1
 server=1
@@ -88,8 +88,7 @@ daemon=1
 listenonion=0
 listen=1
 staking=0
-rpcport=17866
-port=17817
+port=8420
 masternode=1
 masternodeprivkey=$GENKEY
 
@@ -109,52 +108,25 @@ sudo ufw default allow outgoing
 sudo ufw default deny incoming
 sudo ufw allow ssh/tcp
 sudo ufw limit ssh/tcp
-sudo ufw allow 17866/tcp
-sudo ufw allow 17817/tcp
+sudo ufw allow 8420/tcp
 sudo ufw logging on
 sudo ufw status
 echo y | sudo ufw enable
 echo "basic security completed..."
 
 echo "restarting wallet with new configs, 30 seconds..."
-protond --daemon
+ultimad --daemon
 sleep 30
 
 
-
-
-echo "Installing sentinel..."
-cd /root/.protoncore
-
-sudo git clone https://github.com/protoncoin/proton_sentinel.git
-
-cd proton_sentinel
-
-
-virtualenv ./venv
-./venv/bin/pip install -r requirements.txt
-
-echo "proton_conf=/root/.protoncore/proton.conf" >> /root/.protoncore/proton_sentinel/sentinel.conf
-
-crontab -l > proton
-#echo new cron into cron file
-echo "* * * * * cd /root/.protoncore/proton_sentinel && ./venv/bin/python bin/sentinel.py >/dev/null 2>&1" >> proton
-#install new cron file
-crontab proton
-rm proton
-
-SENTINEL_DEBUG=1 ./venv/bin/python bin/sentinel.py
-echo "Sentinel Installed"
-
-
-echo "proton-cli getmininginfo:"
-proton-cli getmininginfo
+echo "ultima-cli getmininginfo:"
+ultima-cli getmininginfo
 
 echo "masternode status:"
-proton-cli masternode status
+ultima-cli masternode status
 
-echo "INSTALLED WITH VPS IP: $WANIP:17817"
+echo "INSTALLED WITH VPS IP: $WANIP:8420"
 sleep 1
 echo "INSTALLED WITH GENKEY: $GENKEY"
 sleep 1
-echo "rpcuser=protoncoin\nrpcpassword=$PASSWORD"
+echo "rpcuser=ultimacoin\nrpcpassword=$PASSWORD"
