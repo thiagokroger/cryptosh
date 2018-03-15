@@ -56,9 +56,9 @@ sudo chmod 777 DiscountCoind
 sudo cp DiscountCoind /usr/local/bin/discountcoind
 
 echo "Loading wallet, 30 seconds wait..."
-discountd --daemon
+discountcoind --daemon
 sleep 30
-discountd stop
+discountcoind stop
 sleep 30
 cat <<EOF > ~/.DiscountCoin/DiscountCoin.conf
 rpcuser=DiscountCoin
@@ -66,15 +66,15 @@ rpcpassword=3a76std7sa6da8sfd8
 EOF
 
 echo "RELOADING WALLET..."
-discountd --daemon
+discountcoind --daemon
 sleep 10
 
 echo "making genkey..."
-GENKEY=$(discountd masternode genkey)
+GENKEY=$(discountcoind masternode genkey)
 
 echo "mining info..."
-discountd getmininginfo
-discountd stop
+discountcoind getmininginfo
+discountcoind stop
 
 echo "creating final config..."
 
@@ -115,15 +115,15 @@ echo y | sudo ufw enable
 echo "basic security completed..."
 
 echo "restarting wallet with new configs, 30 seconds..."
-discountd --daemon
+discountcoind --daemon
 sleep 30
 
 
-echo "discountd getmininginfo:"
-discountd getmininginfo
+echo "discountcoind getmininginfo:"
+discountcoind getmininginfo
 
 echo "masternode status:"
-discountd masternode status
+discountcoind masternode status
 
 echo "INSTALLED WITH VPS IP: $WANIP:9448"
 sleep 1
