@@ -52,8 +52,8 @@ wget http://github.com/ultimammp/ultima/releases/download/0.12.1.1/ultima_linux.
 
 mkdir ultima-0.12.1.1
 tar -zxvf ultima_linux.tar.gz -C ultima-0.12.1.1
-sudo cp ultima-0.12.1.1/ultimad /usr/local/bin/
-sudo cp ultima-0.12.1.1/ultima-cli /usr/local/bin/
+sudo cp ultima-0.12.1.1/compiled/ultimad /usr/local/bin/
+sudo cp ultima-0.12.1.1/compiled/ultima-cli /usr/local/bin/
 
 echo "Loading wallet, 30 seconds wait..."
 ultimad --daemon
