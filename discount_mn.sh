@@ -1,5 +1,5 @@
 echo "=================================================================="
-echo "CRYPTOSH Ultimacoin MN Install"
+echo "CRYPTOSH DiscountCoin MN Install"
 echo "=================================================================="
 
 #read -p 'Enter your masternode genkey you created in windows, then hit [ENTER]: ' GENKEY
@@ -10,7 +10,7 @@ sudo apt-get install -y pwgen
 echo -n "Installing dns utils..."
 sudo apt-get install -y dnsutils
 
-PASSWORD="ultimacoin@passwd"
+PASSWORD="DiscountCoin@passwd"
 WANIP=$(dig +short myip.opendns.com @resolver1.opendns.com)
 
 #begin optional swap section
@@ -34,7 +34,7 @@ sudo apt-get upgrade -y
 sudo apt-get dist-upgrade -y
 sudo apt-get install git -y
 sudo apt-get install nano -y
-sudo apt-get install build-essential libtool automake autoconf -y
+sudo apt-get install build-essential libtool automake autoconf unzip -y
 sudo apt-get install autotools-dev autoconf pkg-config libssl-dev -y
 sudo apt-get install libgmp3-dev libevent-dev bsdmainutils libboost-all-dev -y
 sudo apt-get install libzmq3-dev -y
@@ -48,39 +48,39 @@ sudo apt-get install libdb5.3-dev libdb5.3++-dev -y
 
 echo "Packages complete..."
 
-wget http://github.com/ultimammp/ultima/releases/download/0.12.1.1/ultima_linux.tar.gz
-
-mkdir ultima-0.12.1.1
-tar -zxvf ultima_linux.tar.gz -C ultima-0.12.1.1
-sudo cp ultima-0.12.1.1/compiled/ultimad /usr/local/bin/
-sudo cp ultima-0.12.1.1/compiled/ultima-cli /usr/local/bin/
+mkdir DiscountCoin
+cd DiscountCoin
+wget https://discountco.in/binaries/DiscountCoin-LinuxDaemon.zip
+unzip DiscountCoin-LinuxDaemon.zip
+sudo chmod 777 DiscountCoind
+sudo cp DiscountCoind /usr/local/bin/discountcoind
 
 echo "Loading wallet, 30 seconds wait..."
-ultimad --daemon
+discountd --daemon
 sleep 30
-ultima-cli stop
+discountd stop
 sleep 30
-cat <<EOF > ~/.ultimacore/ultima.conf
-rpcuser=ultimacoin
+cat <<EOF > ~/.DiscountCoin/DiscountCoin.conf
+rpcuser=DiscountCoin
 rpcpassword=3a76std7sa6da8sfd8
 EOF
 
 echo "RELOADING WALLET..."
-ultimad --daemon
+discountd --daemon
 sleep 10
 
 echo "making genkey..."
-GENKEY=$(ultima-cli masternode genkey)
+GENKEY=$(discountd masternode genkey)
 
 echo "mining info..."
-ultima-cli getmininginfo
-ultima-cli stop
+discountd getmininginfo
+discountd stop
 
 echo "creating final config..."
 
-cat <<EOF > ~/.ultimacore/ultima.conf
+cat <<EOF > ~/.DiscountCoin/DiscountCoin.conf
 
-rpcuser=ultimacoin
+rpcuser=DiscountCoin
 rpcpassword=$PASSWORD
 rpcallowip=127.0.0.1
 server=1
@@ -88,7 +88,7 @@ daemon=1
 listenonion=0
 listen=1
 staking=0
-port=8420
+port=9448
 masternode=1
 masternodeprivkey=$GENKEY
 
@@ -108,25 +108,25 @@ sudo ufw default allow outgoing
 sudo ufw default deny incoming
 sudo ufw allow ssh/tcp
 sudo ufw limit ssh/tcp
-sudo ufw allow 8420/tcp
+sudo ufw allow 9448/tcp
 sudo ufw logging on
 sudo ufw status
 echo y | sudo ufw enable
 echo "basic security completed..."
 
 echo "restarting wallet with new configs, 30 seconds..."
-ultimad --daemon
+discountd --daemon
 sleep 30
 
 
-echo "ultima-cli getmininginfo:"
-ultima-cli getmininginfo
+echo "discountd getmininginfo:"
+discountd getmininginfo
 
 echo "masternode status:"
-ultima-cli masternode status
+discountd masternode status
 
-echo "INSTALLED WITH VPS IP: $WANIP:8420"
+echo "INSTALLED WITH VPS IP: $WANIP:9448"
 sleep 1
 echo "INSTALLED WITH GENKEY: $GENKEY"
 sleep 1
-echo "rpcuser=ultimacoin\nrpcpassword=$PASSWORD"
+echo "rpcuser=discountCoin\nrpcpassword=$PASSWORD"
