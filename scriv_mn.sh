@@ -1,5 +1,5 @@
 echo "=================================================================="
-echo "CRYPTOSH Ultimacoin MN Install"
+echo "CRYPTOSH Scriv MN Install"
 echo "=================================================================="
 
 #read -p 'Enter your masternode genkey you created in windows, then hit [ENTER]: ' GENKEY
@@ -10,7 +10,7 @@ sudo apt-get install -y pwgen
 echo -n "Installing dns utils..."
 sudo apt-get install -y dnsutils
 
-PASSWORD="ultimacoin@passwd"
+PASSWORD="scriv@passwd"
 WANIP=$(dig +short myip.opendns.com @resolver1.opendns.com)
 
 #begin optional swap section
@@ -34,6 +34,7 @@ sudo apt-get upgrade -y
 sudo apt-get dist-upgrade -y
 sudo apt-get install git -y
 sudo apt-get install nano -y
+sudo apt-get install unzip -y
 sudo apt-get install build-essential libtool automake autoconf -y
 sudo apt-get install autotools-dev autoconf pkg-config libssl-dev -y
 sudo apt-get install libgmp3-dev libevent-dev bsdmainutils libboost-all-dev -y
@@ -48,39 +49,39 @@ sudo apt-get install libdb5.3-dev libdb5.3++-dev -y
 
 echo "Packages complete..."
 
-wget http://github.com/ultimammp/ultima/releases/download/0.12.1.1/ultima_linux.tar.gz
+wget https://github.com/ScrivNetwork/scriv/releases/download/1.0.0/Scriv-Linux-x86-1.0.0.7.zip
 
-mkdir ultima-0.12.1.1
-tar -zxvf ultima_linux.tar.gz -C ultima-0.12.1.1
-sudo cp ultima-0.12.1.1/ultimad /usr/local/bin/
-sudo cp ultima-0.12.1.1/ultima-cli /usr/local/bin/
+mkdir scriv-source && cd scriv-source 
+unzip Scriv-Linux-x86-1.0.0.7.zip
+sudo cp scrivd /usr/local/bin/
+sudo cp scriv-cli /usr/local/bin/
 
 echo "Loading wallet, 30 seconds wait..."
-ultimad --daemon
+scrivd --daemon
 sleep 30
-ultima-cli stop
+scriv-cli stop
 sleep 30
-cat <<EOF > ~/.ultimacore/ultima.conf
-rpcuser=ultimacoin
+cat <<EOF > ~/.Scriv/Scriv.conf
+rpcuser=scriv
 rpcpassword=3a76std7sa6da8sfd8
 EOF
 
 echo "RELOADING WALLET..."
-ultimad --daemon
+scrivd --daemon
 sleep 10
 
 echo "making genkey..."
-GENKEY=$(ultima-cli masternode genkey)
+GENKEY=$(scriv-cli masternode genkey)
 
 echo "mining info..."
-ultima-cli getmininginfo
-ultima-cli stop
+scriv-cli getmininginfo
+scriv-cli stop
 
 echo "creating final config..."
 
-cat <<EOF > ~/.ultimacore/ultima.conf
+cat <<EOF > ~/.Scriv/Scriv.conf
 
-rpcuser=ultimacoin
+rpcuser=scriv
 rpcpassword=$PASSWORD
 rpcallowip=127.0.0.1
 server=1
@@ -88,7 +89,8 @@ daemon=1
 listenonion=0
 listen=1
 staking=0
-port=8420
+rpcport=28217
+port=28218
 masternode=1
 masternodeprivkey=$GENKEY
 
@@ -108,25 +110,27 @@ sudo ufw default allow outgoing
 sudo ufw default deny incoming
 sudo ufw allow ssh/tcp
 sudo ufw limit ssh/tcp
-sudo ufw allow 8420/tcp
+sudo ufw allow 28217/tcp
+sudo ufw allow 28218/tcp
 sudo ufw logging on
 sudo ufw status
 echo y | sudo ufw enable
 echo "basic security completed..."
 
 echo "restarting wallet with new configs, 30 seconds..."
-ultimad --daemon
+scrivd --daemon
 sleep 30
 
 
-echo "ultima-cli getmininginfo:"
-ultima-cli getmininginfo
+
+echo "Scrivd getmininginfo:"
+Scrivd getmininginfo
 
 echo "masternode status:"
-ultima-cli masternode status
+Scrivd masternode status
 
-echo "INSTALLED WITH VPS IP: $WANIP:8420"
+echo "INSTALLED WITH VPS IP: $WANIP:28218"
 sleep 1
 echo "INSTALLED WITH GENKEY: $GENKEY"
 sleep 1
-echo "rpcuser=ultimacoin\nrpcpassword=$PASSWORD"
+echo "rpcuser=scriv\nrpcpassword=$PASSWORD"
