@@ -87,6 +87,7 @@ cat <<EOF > ~/.smrt/smrt.conf
 rpcuser=SmartSpace
 rpcpassword=$PASSWORD
 rpcallowip=127.0.0.1
+rpcport=52311
 server=1
 daemon=1
 listenonion=0
@@ -113,6 +114,7 @@ sudo ufw default deny incoming
 sudo ufw allow ssh/tcp
 sudo ufw limit ssh/tcp
 sudo ufw allow 52310/tcp
+sudo ufw allow 52311/tcp
 sudo ufw logging on
 sudo ufw status
 echo y | sudo ufw enable
@@ -134,3 +136,5 @@ sleep 1
 echo "INSTALLED WITH GENKEY: $GENKEY"
 sleep 1
 echo "rpcuser=SmartSpace\nrpcpassword=$PASSWORD"
+sleep 1
+echo "donations (SMRT): ShLsyxiXW5sD6bjHQrjScuwwES88gkTCPr"
