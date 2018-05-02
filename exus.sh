@@ -48,10 +48,10 @@ sudo apt-get install libdb5.3-dev libdb5.3++-dev -y
 
 echo "Packages complete..."
 
-wget https://github.com/exuscoin/exus/releases/download/v1.0.0.4/exusd-1.0.0.4-ubuntu-16.04.tar.gz
+wget https://github.com/exuscoin/exus/releases/download/v2.0.0.1/exusd-2.0.0.1-ubuntu-16.04.tar.gz
 
 
-tar -zxvf exusd-1.0.0.4-ubuntu-16.04.tar.gz
+tar -zxvf exusd-2.0.0.1-ubuntu-16.04.tar.gz
 sudo cp exusd /usr/local/bin/
 
 echo "Loading wallet, 30 seconds wait..."
@@ -102,9 +102,28 @@ sudo apt-get update -y
 sudo systemctl enable fail2ban
 sudo systemctl start fail2ban
 
+#add a firewall
+sudo ufw default allow outgoing
+sudo ufw default deny incoming
+sudo ufw allow ssh/tcp
+sudo ufw limit ssh/tcp
+sudo ufw allow 15876/tcp
+sudo ufw logging on
+sudo ufw status
+sudo ufw enable
+echo "basic security completed..."
+
+
 echo "restarting wallet with new configs, 30 seconds..."
 exusd --daemon
 sleep 30
+
+crontab -l > reb
+#echo new cron into cron file
+echo "@reboot sleep 30 && exusd --daemon" >> reb
+#install new cron file
+crontab reb
+rm reb
 
 echo "exusd getmininginfo:"
 exusd getmininginfo
