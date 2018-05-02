@@ -53,11 +53,14 @@ cd SmartSpace
 wget https://github.com/smrt-crypto/smrt/releases/download/v1.1.0.5/smrtd-lin64
 sudo chmod 777 smrtd-lin64
 sudo cp smrtd-lin64 /usr/local/bin/smartspaced
+wget https://github.com/smrt-crypto/smrt/releases/download/v1.1.0.5/smrt-cli-lin64
+sudo chmod 777 smrt-cli-lin64
+sudo cp smrt-cli-lin64 /usr/local/bin/smartspace-cli
 
 echo "Loading wallet, 30 seconds wait..."
 smartspaced --daemon
 sleep 30
-smartspaced stop
+smartspace-cli stop
 sleep 30
 cat <<EOF > ~/.smrt/smrt.conf
 rpcuser=SmartSpace
@@ -69,11 +72,11 @@ smartspaced --daemon
 sleep 10
 
 echo "making genkey..."
-GENKEY=$(smartspaced masternode genkey)
+GENKEY=$(smartspace-cli masternode genkey)
 
 echo "mining info..."
-smartspaced getmininginfo
-smartspaced stop
+smartspace-cli getmininginfo
+smartspace-cli stop
 
 echo "creating final config..."
 
@@ -118,11 +121,11 @@ smartspaced --daemon
 sleep 30
 
 
-echo "smartspaced getmininginfo:"
-smartspaced getmininginfo
+echo "smartspace-cli getmininginfo:"
+smartspace-cli getmininginfo
 
 echo "masternode status:"
-smartspaced masternode status
+smartspace-cli masternode status
 
 echo "INSTALLED WITH VPS IP: $WANIP:52310"
 sleep 1
