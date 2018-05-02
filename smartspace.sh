@@ -57,6 +57,8 @@ wget https://github.com/smrt-crypto/smrt/releases/download/v1.1.0.5/smrt-cli-lin
 sudo chmod 777 smrt-cli-lin64
 sudo cp smrt-cli-lin64 /usr/local/bin/smartspace-cli
 
+smartspace-cli stop
+sleep 30
 echo "Loading wallet, 30 seconds wait..."
 smartspaced --daemon
 sleep 30
