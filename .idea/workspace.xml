@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1afb56f2-72cb-4847-a6f7-7762d965a06d" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-    </list>
+    <list default="true" id="1afb56f2-72cb-4847-a6f7-7762d965a06d" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -16,11 +14,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="exus.sh" pinned="false" current-in-tab="false">
+      <file leaf-file-name="exus.sh" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/exus.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="154">
-              <caret line="54" selection-start-line="54" selection-end-line="54" selection-end-column="29" />
+            <state relative-caret-position="31">
+              <caret line="38" column="78" lean-forward="true" selection-start-line="38" selection-start-column="78" selection-end-line="38" selection-end-column="78" />
             </state>
           </provider>
         </entry>
@@ -34,7 +32,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="75">
@@ -80,8 +78,8 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="62" />
-    <option name="y" value="49" />
+    <option name="x" value="-3778" />
+    <option name="y" value="265" />
     <option name="width" value="1296" />
     <option name="height" value="922" />
   </component>
@@ -139,15 +137,15 @@
       <updated>1528290180532</updated>
       <workItem from="1528290181812" duration="1538000" />
       <workItem from="1528294014239" duration="622000" />
-      <workItem from="1528640727814" duration="85000" />
+      <workItem from="1528640727814" duration="778000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2245000" />
+    <option name="totallyTimeSpent" value="2938000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="62" y="49" width="1296" height="922" extended-state="0" />
+    <frame x="-3778" y="265" width="1296" height="922" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26588234" />
@@ -217,13 +215,6 @@
     <entry file="file://$PROJECT_DIR$/flat.sh">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/exus.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="54" selection-start-line="54" selection-end-line="54" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/apollon_update.sh">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
@@ -235,6 +226,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="5" column="15" lean-forward="true" selection-start-line="5" selection-start-column="15" selection-end-line="5" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/exus.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="31">
+          <caret line="38" column="78" lean-forward="true" selection-start-line="38" selection-start-column="78" selection-end-line="38" selection-end-column="78" />
         </state>
       </provider>
     </entry>

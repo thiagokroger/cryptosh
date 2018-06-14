@@ -1,5 +1,5 @@
 echo "=================================================================="
-echo "PARANOID TRUTH NORTHERN MN Install"
+echo "Cryptosh NORTHERN MN Install"
 echo "=================================================================="
 echo "Installing, and will take up to 3 min to run..."
 #read -p 'Enter your masternode genkey you created in windows, then hit [ENTER]: ' GENKEY
@@ -48,10 +48,16 @@ sudo apt-get install libdb5.3-dev libdb5.3++-dev -y
 
 echo "Packages complete..."
 
-wget https://github.com/Northerncryptodev/Northern/releases/download/v2.0.1/northern-2.0.1.x86_64-linux-gnu-daemon-nogui.tar.gz
+rm -rf northern-1.0.0-x86_64-linux-gnu.tar.gz
+rm -rdf /root/.northern
+northernd --stop
+sudo rm -rf /usr/local/bin/northernd
+northern-cli --stop
+sudo rm -rf /usr/local/bin/northern-cli
 
+wget https://github.com/zabtc/Northern/releases/download/1.0.0/northern-1.0.0-x86_64-linux-gnu.tar.gz
 
-tar -zxvf northern-2.0.1.x86_64-linux-gnu-daemon-nogui.tar.gz
+tar -zxvf northern-1.0.0-x86_64-linux-gnu.tar.gz
 sudo cp northern-2.0.1/northernd /usr/local/bin/
 sudo cp northern-2.0.1/northern-cli /usr/local/bin/
 
@@ -91,6 +97,19 @@ port=60151
 masternode=1
 masternodeaddr=$WANIP:60151
 masternodeprivkey=$GENKEY
+addnode=207.246.69.246
+addnode=209.250.233.104
+addnode=45.77.82.101
+addnode=138.68.167.127
+addnode=45.77.218.53
+addnode=207.246.86.118
+addnode=128.199.44.28
+addnode=139.59.164.167
+addnode=139.59.177.56
+addnode=206.189.58.89
+addnode=207.154.202.113
+addnode=140.82.54.227
+
 
 EOF
 
@@ -102,6 +121,17 @@ sudo apt-get update -y
 #fail2ban:
 sudo systemctl enable fail2ban
 sudo systemctl start fail2ban
+
+#add a firewall
+sudo ufw default allow outgoing
+sudo ufw default deny incoming
+sudo ufw allow ssh/tcp
+sudo ufw limit ssh/tcp
+sudo ufw allow 60151/tcp
+sudo ufw logging on
+sudo ufw status
+echo y | sudo ufw enable
+echo "basic security completed..."
 
 echo "restarting wallet with new configs, 30 seconds..."
 northernd --daemon
