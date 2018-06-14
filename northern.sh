@@ -64,7 +64,8 @@ sudo cp northern-cli /usr/local/bin/
 echo "Loading wallet, 30 seconds wait..."
 northernd --daemon
 sleep 30
-
+northern-cli stop
+sleep 30
 cat <<EOF > ~/.northern/northern.conf
 rpcuser=northern
 rpcpassword=3a76std7sa6da8sfd8
