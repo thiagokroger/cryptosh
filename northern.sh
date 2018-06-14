@@ -58,8 +58,8 @@ sudo rm -rf /usr/local/bin/northern-cli
 wget https://github.com/zabtc/Northern/releases/download/1.0.0/northern-1.0.0-x86_64-linux-gnu.tar.gz
 
 tar -zxvf northern-1.0.0-x86_64-linux-gnu.tar.gz
-sudo cp northern-2.0.1/northernd /usr/local/bin/
-sudo cp northern-2.0.1/northern-cli /usr/local/bin/
+sudo cp northernd /usr/local/bin/
+sudo cp northern-cli /usr/local/bin/
 
 echo "Loading wallet, 30 seconds wait..."
 northernd --daemon
