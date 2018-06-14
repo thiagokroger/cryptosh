@@ -56,6 +56,8 @@ sudo cp exusd /usr/local/bin/
 
 echo "Loading wallet, 30 seconds wait..."
 exusd --daemon
+sleep 10
+exusd stop
 sleep 30
 
 cat <<EOF > ~/.exus/exus.conf
