@@ -69,7 +69,7 @@
     "search": true,
     "movement": true,
     "network": true,
-    "masternodes": false,
+    "masternodes": true,
     "coininfo": false,
     "coinmarketcap": false
   },

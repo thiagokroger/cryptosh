@@ -5,28 +5,38 @@
 */
 {
   // name your instance!
-  "title": "NodeCircle Block Explorer",
+  "title": "Explorerz.top",
 
   "address": "127.0.0.1:3001",
 
   // coin name
-  "coin": "NodeCircle",
+  "coin": "Darkcoin",
 
   // coin symbol
-  "symbol": "NCX",
+  "symbol": "DRK",
+
+  // coin type
+  //  Options:
+  //    bitcoin = Default Bitcoin/Dash/... clones
+  //    ripple = Ripple clones
+  "baseType": "bitcoin",
+
+  // The epoch time for a ripple based coin.
+  // You can ignore this setting if you're not using a ripple based coin.
+  "rippleEpoch": 946684800,
 
   // logo
-  "logo": "http://nodecircle.io/wp-content/uploads/2018/06/logo-dark-500x101.png",
+  "logo": "/images/logo.png",
 
   // favicon
-  "favicon": "http://nodecircle.io/wp-content/uploads/2018/06/HmQ4LE1.png",
+  "favicon": "public/favicon.ico",
 
   // Uses bootswatch themes (http://bootswatch.com/)
   // Valid options:
   //     Cerulean, Cosmo, Cyborg, Darkly, Flatly, Journal, Lumen, Paper,
   //     Readable, Sandstone, Simplex, Slate, Spacelab, Superhero, United, Yeti
   // theme (see /public/themes for available themes)
-  "theme": "Cerulean",
+  "theme": "Cyborg",
 
   // port to listen for requests on.
   "port" : 3001,
@@ -47,9 +57,9 @@
   // wallet settings
   "wallet": {
     "host": "localhost",
-    "port": 18774,
-    "user": "local",
-    "pass": "local@123"
+    "port": 9332,
+    "user": "darkcoinrpc",
+    "pass": "123gfjk3R3pCCVjHtbRde2s5kzdf233sa"
   },
 
   // confirmations
@@ -68,31 +78,35 @@
     "googleplus": false,
     "search": true,
     "movement": true,
-    "network": true
+    "network": true,
+    "masternodes": false,
+    "coininfo": false,
+    "coinmarketcap": false
   },
 
   // index page (valid options for difficulty are POW, POS or Hybrid)
   "index": {
     "show_hashrate": true,
-    "difficulty": "POS",
+    "show_coin_supply": true,
+    "difficulty": "POW",
     "last_txs": 100
   },
 
   // ensure links on API page are valid
   "api": {
-    "blockindex": 3864,
-    "blockhash": "8346cb6a5936f36365bbf6960277f2987cb70ad030d486e93edc4098b11c512b",
-    "txhash": "79be6d2dcbca27c9b5b4e09c6cbe23804185117ad09c541e9218529ff2629afe",
-    "address": "9qrzV8TtajWPtuXqP7tA4wcVcqnLyTeUrq"
+    "blockindex": 1337,
+    "blockhash": "1733320247b15ca2262be646397d1ffd6be953fa638ebb8f5dcbb4c2b91b34f1",
+    "txhash": "f270cd3813254c9922a2e222a56ba745842d9112223a1394062e460b33d27b7e",
+    "address": "RBiXWscC63Jdn1GfDtRj8hgv4Q6Zppvpwb"
   },
 
   // market settings
   //supported markets: bittrex, poloniex, yobit, empoex, bleutrade, cryptopia, ccex
   //default market is loaded by default and determines last price in header
   "markets": {
-    "coin": "NCX",
+    "coin": "JBS",
     "exchange": "BTC",
-    "enabled": [],
+    "enabled": ["bittrex"],
     "cryptopia_id": "1658",
     "ccex_key" : "Get-Your-Own-Key",
     "default": "bittrex"
@@ -102,7 +116,8 @@
   "richlist": {
     "distribution": true,
     "received": true,
-    "balance": true
+    "balance": true,
+    "coin_supply": true
   },
   // movement page settings
   // min amount: show transactions greater than this value
@@ -114,12 +129,50 @@
     "high_flag": 5000
   },
 
+  // Masternodes page
+  // default port: Default port a masternode is running.
+  "masternodes": {
+    "default_port": 12845,
+
+    // Use index-based values (starting with 0).
+    // 0 is the key of the masterlist data.
+    // -1 means that the info is not available.
+    "list_format": {
+      "address": 3,
+      "status": 1,
+      "lastseen": 5,
+      "lastpaid": -1,
+      "ip": 0
+    }
+  },
+
+
+  // Coin info page
+  "coininfo": {
+    "basic_info_links": [
+      ["Github", "http://github.com/"]
+    ],
+    "masternode_required": 1000,
+    "block_time_sec": 120,
+    "block_reward_mn": 5
+  },
+
+  // CoinMarketCap integration
+  "coinmarketcap": {
+    "ticker": "BTC"
+  },
+
   // twitter, facebook, googleplus
-  "twitter": "ncxofficial",
+  "twitter": "explorerztop",
+  "facebook": "yourfacebookpage",
+  "googleplus": "yourgooglepluspage",
 
   //genesis
   "genesis_tx": "65f705d2f385dc85763a317b3ec000063003d6b039546af5d8195a5ec27ae410",
   "genesis_block": "b2926a56ca64e0cd2430347e383f63ad7092f406088b9b86d6d68c2a34baef51",
+
+  // Fetch blocks from <index>
+  "fetch_blocks_from": 0,
 
   //heavy (enable/disable additional heavy features)
   "heavy": false,
